@@ -1,17 +1,25 @@
 {
   "name": "hollow-knight-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "nodemon src/server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "hollow knight",
+    "api",
+    "rest",
+    "secured",
+    "videogame"
+  ],
   "author": "Maikol",
   "license": "ISC",
-  "description": "A simple API for Hollow knight data usin express + mongoose + jwt",
+  "description": "A simple API for Hollow knight data using express + mongoose + jwt",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
@@ -19,6 +27,10 @@
     "mongoose": "^8.18.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "cross-env": "^10.1.0",
+    "jest": "^30.2.0",
+    "mongodb-memory-server": "^10.2.1",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   }
 }
