@@ -1,79 +1,77 @@
-import Region from '../models/Region.js'
+import Region from "../models/Region.js";
 
 export const getAllRegions = async (req, res) => {
-    try {
+  try {
+    const regions = await Region.find();
+    if (regions.length < 1) return res.status(200).json([]);
 
-        const regions = await Region.find();
-        if (regions.length < 1) return res.status(404).json({ error: "La lista de regiones está vacía" });
-
-        res.status(200).json(regions);
-
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.status(200).json(regions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 export const getRegionById = async (req, res) => {
-    try {
+  try {
+    const regionId = req.params.regionId;
 
-        const regionId = req.params.regionId;
+    const region = await Region.findById(regionId);
 
-        const region = await Region.findById(regionId);
+    if (!region) return res.status(404).json({ error: "La región no existe" });
 
-        if (!region) return res.status(404).json({ error: "La región no existe" });
-
-        res.status(200).json(region);
-
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.status(200).json(region);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 export const createRegion = async (req, res) => {
-    try {
+  try {
+    const { name, description, imageRegion } = req.body;
 
-        const { name, description } = req.body;
-
-        const newRegion = new Region({
-            name,
-            description
-        });
-
-        newRegion.save();
-        res.status(201).json(newRegion);
-
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    if (!name) {
+      return res.status(400).json({ error: "El nombre es obligatorio" });
     }
-}
+
+    const newRegion = new Region({
+      name,
+      description,
+      imageRegion,
+    });
+
+    newRegion.save();
+    res.status(201).json(newRegion);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 export const updateRegion = async (req, res) => {
-    try {
+  try {
+    const regionId = req.params.regionId;
+    const updatedRegion = await Region.findByIdAndUpdate(regionId, req.body, {
+      new: true,
+    });
 
-        const regionId = req.params.regionId;
-        const updatedRegion = await Region.findByIdAndUpdate(regionId, req.body, { new: true });
+    if (!updatedRegion)
+      return res.status(404).json({ error: "La región no existe" });
 
-        if (!updatedRegion) return res.status(404).json({ error: "La región no existe" });
-
-        res.status(200).json(updatedRegion);
-
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-
-    }
+    res.status(200).json(updatedRegion);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 export const deleteRegion = async (req, res) => {
-    try {
+  try {
+    const regionId = req.params.regionId;
+    const deletedRegion = await Region.findByIdAndDelete(regionId);
 
-        const regionId = req.params.regionId;
-        const deletedRegion = await Region.findByIdAndDelete(regionId);
+    if (!deletedRegion)
+      return res.status(404).json({ error: "La región no existe" });
 
-        if (!deletedRegion) return res.status(404).json({ error: "La región no existe" });
-
-        res.sendStatus(204);
-
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };

@@ -1,22 +1,28 @@
 import mongoose from "mongoose";
 
-const characterSchema = new mongoose.Schema({
+const characterSchema = new mongoose.Schema(
+  {
     name: { type: String, required: true },
-    description: { type: String, defautl: "No se conoce nada acerca de este personaje" },
-
+    description: {
+      type: String,
+      default: "No se conoce nada acerca de este personaje",
+    },
+    imageCharacter: String,
 
     region: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Region",
-        default: null
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Region",
+      default: null,
     },
 
-    abilities: [{
+    abilities: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Ability"
-    }]
-},
-    { timestamps: true }
+        ref: "Ability",
+      },
+    ],
+  },
+  { timestamps: true }
 );
 
 export default mongoose.model("Character", characterSchema);
