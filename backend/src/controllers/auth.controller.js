@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-import { createAccesToken, createRefreshToken } from "../utils/createTokens.js";
+import {
+  createAccessToken,
+  createRefreshToken,
+} from "../utils/createTokens.js";
 import bcrypt from "bcryptjs";
 
 export const register = async (req, res) => {
@@ -22,7 +25,7 @@ export const register = async (req, res) => {
 
     await newUser.save();
 
-    const accesToken = createAccesToken(newUser);
+    const accessToken = createAccessToken(newUser);
     const refreshToken = createRefreshToken(newUser);
 
     const hashedToken = await bcrypt.hash(refreshToken, 10);
@@ -42,7 +45,7 @@ export const register = async (req, res) => {
         name: newUser.name,
         email: newUser.email,
       },
-      accesToken,
+      accessToken,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -63,7 +66,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: "Credenciales incorrectas" });
     }
 
-    const accesToken = createAccesToken(user);
+    const accessToken = createAccessToken(user);
     const refreshToken = createRefreshToken(user);
 
     const hashedToken = await bcrypt.hash(refreshToken, 10);
@@ -76,7 +79,7 @@ export const login = async (req, res) => {
       sameSite: "strict",
     });
 
-    res.json({ accesToken });
+    res.json({ accessToken });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -99,9 +102,9 @@ export const refresh = async (req, res) => {
 
     if (!valid) return res.status(403).json({ error: "No autorizado" });
 
-    const accesToken = createAccesToken(user);
+    const accessToken = createaccessToken(user);
 
-    res.json({ accesToken });
+    res.json({ accessToken });
   } catch (error) {
     return res.status(403).json({ error: "Refresh token inválido" });
   }

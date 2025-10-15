@@ -18,7 +18,7 @@ export const getAbilityById = async (req, res) => {
     const ability = await Ability.findById(abilityId);
 
     if (!ability)
-      return res.status(404).json({ error: "La habilabilidad no existe" });
+      return res.status(404).json({ error: "La habilidad no existe" });
 
     res.status(200).json(ability);
   } catch (error) {
