@@ -15,7 +15,7 @@ const abilitySchema = new mongoose.Schema(
       type: String,
       default: "No se conoce cómo obtener esta habilidad",
     },
-    iconAbility: String,
+    icon: String,
   },
   { timestamps: true }
 );

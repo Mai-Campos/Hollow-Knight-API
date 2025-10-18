@@ -216,6 +216,7 @@ function NavBar() {
                     color: "#FFFFFF",
                     fontWeight: 700,
                     "&:hover": { backgroundColor: "#1e293b" },
+                    borderRadius: 3,
                   }}
                 >
                   LOGIN

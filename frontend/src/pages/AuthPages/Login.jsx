@@ -6,8 +6,7 @@ import {
   Container,
   Paper,
   Alert,
-  AlertTitle,
-  Stack,
+  Snackbar,
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +17,11 @@ function Login() {
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [openSnackBar, setOpenSnackBar] = useState(true);
+
+  const handleCloseSnackBar = () => {
+    setOpenSnackBar(false);
+  };
 
   const handleChange = (e) => {
     if (e.target.name === "email") {
@@ -34,19 +38,27 @@ function Login() {
       navigate("/");
     } catch (error) {
       setError(error.message);
-      console.log(error.message);
+      setOpenSnackBar(true);
     }
   };
 
   return (
     <>
       {error != "" && (
-        <Stack sx={{ width: "100%" }} spacing={2}>
-          <Alert severity="error">
-            <AlertTitle>Error</AlertTitle>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={openSnackBar}
+          onClose={handleCloseSnackBar}
+        >
+          <Alert
+            onClose={handleCloseSnackBar}
+            severity="error"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
             {error}
           </Alert>
-        </Stack>
+        </Snackbar>
       )}
       <Box
         sx={{
@@ -178,6 +190,7 @@ function Login() {
                     color: "#9A8C98",
                     cursor: "pointer",
                     textDecoration: "underline",
+                    fontWeight: "bold",
                     ml: 1,
                   }}
                   onClick={() => {

@@ -1,3 +1,20 @@
+export const register = async (form) => {
+  const res = await fetch("http://localhost:3000/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(form),
+  });
+  const data = await res.json();
+
+  if (!res.ok || res.status != 201) {
+    throw new Error(data.error || "Error al registrar el usuario");
+  }
+
+  localStorage.setItem("accessToken", data.accessToken);
+  return data;
+};
+
 export const login = async (form) => {
   const res = await fetch("http://localhost:3000/api/auth/login", {
     method: "POST",
@@ -38,4 +55,7 @@ export const logout = async () => {
   });
 
   localStorage.removeItem("accessToken");
+  window.dispatchEvent(
+    new CustomEvent("authChanged", { detail: { loggedIn: false } })
+  );
 };

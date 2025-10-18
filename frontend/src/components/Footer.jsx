@@ -1,5 +1,7 @@
 import { Box, Container, Grid, Typography, Link } from "@mui/material";
-import { GitHub, Email, Telegram } from "@mui/icons-material";
+import Email from "@mui/icons-material/Email";
+import GitHub from "@mui/icons-material/GitHub";
+import Telegram from "@mui/icons-material/Telegram";
 
 function Footer() {
   return (
@@ -106,7 +108,6 @@ function Footer() {
               </Link>
             </Box>
           </Grid>
-
           {/* -------------------- TECNOLOGIAS -------------------- */}
           <Grid>
             <Typography

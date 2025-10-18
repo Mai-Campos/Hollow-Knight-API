@@ -28,7 +28,7 @@ export const getAbilityById = async (req, res) => {
 
 export const createAbility = async (req, res) => {
   try {
-    const { name, description, effects, howToObtain, iconAbility } = req.body;
+    const { name, description, effects, howToObtain, icon } = req.body;
 
     if (!name) {
       return res.status(400).json({ error: "El nombre es obligatorio" });
@@ -39,7 +39,7 @@ export const createAbility = async (req, res) => {
       description,
       effects,
       howToObtain,
-      iconAbility,
+      icon,
     });
 
     await newAbility.save();
