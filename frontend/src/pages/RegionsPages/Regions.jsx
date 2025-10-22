@@ -8,7 +8,9 @@ import {
   CardMedia,
   CardContent,
   LinearProgress,
+  InputAdornment,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
 function Regions() {
@@ -27,36 +29,25 @@ function Regions() {
         setToken(tokenNow);
       }
     };
-
     window.addEventListener("authChanged", onAuthChanged);
-
     return () => window.removeEventListener("authChanged", onAuthChanged);
   }, [navigate]);
 
   useEffect(() => {
     const getRegions = async () => {
       if (!token) return;
-
       try {
+        setIsLoading(true);
         const res = await fetch("http://localhost:3000/api/regions", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
         });
-
         const data = await res.json();
-        setRegions(data);
-
-        if (Array.isArray(data)) {
-          setRegions(data);
-          setIsLoading(false);
-        } else {
-          console.error("Error al cargar personajes:", data);
-        }
+        if (Array.isArray(data)) setRegions(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getRegions();
@@ -70,13 +61,13 @@ function Regions() {
     <Box
       sx={{
         backgroundColor: "#111121",
-        mt: 2,
         color: "white",
         minHeight: "100vh",
         py: 5,
         px: { xs: 2, md: 6 },
       }}
     >
+      {/* Header y buscador */}
       <Box
         sx={{
           display: "flex",
@@ -89,67 +80,74 @@ function Regions() {
       >
         <Typography
           variant="h4"
-          sx={{
-            fontWeight: "bold",
-            letterSpacing: 1,
-            color: "#E2E8F0",
-          }}
+          sx={{ fontWeight: "bold", letterSpacing: 1, color: "#E2E8F0" }}
         >
           Regions
         </Typography>
-
         <TextField
           placeholder="Search region..."
           variant="outlined"
           size="small"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          InputProps={{
+            style: { color: "white" },
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={{ color: "#9A8C98" }} />
+              </InputAdornment>
+            ),
+          }}
           sx={{
-            backgroundColor: "#111121",
+            backgroundColor: "rgba(255,255,255,0.05)",
             borderRadius: "8px",
-            input: { color: "white" },
+            width: { xs: "100%", sm: "300px" },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "#3F3F46" },
+              "& fieldset": { borderColor: "transparent" },
               "&:hover fieldset": { borderColor: "#9A8C98" },
               "&.Mui-focused fieldset": { borderColor: "#9A8C98" },
             },
-            width: { xs: "100%", sm: "300px" },
           }}
         />
       </Box>
 
-      {isLoading && <LinearProgress color="inherit" />}
-      <Grid container spacing={4} columns={{ xs: 1, sm: 2, md: 4, lg: 4 }}>
+      {/* Loading */}
+      {isLoading && <LinearProgress color="secondary" sx={{ mb: 3 }} />}
+
+      {/* Grid de regiones */}
+      <Grid container spacing={4}>
         {filtered.map((reg) => (
           <Grid key={reg._id}>
             <Card
-              onClick={() => {
-                navigate(`/regions/${reg._id}`);
-              }}
+              onClick={() => navigate(`/regions/${reg._id}`)}
               sx={{
-                backgroundColor: "#2A2A35",
+                backgroundColor: "#1C1C2A",
                 borderRadius: "12px",
-                boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
-                textAlign: "center",
-                p: 2,
-                transition: "transform 0.2s",
-                "&:hover": { transform: "translateY(-4px)" },
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                minHeight: 280,
+                display: "flex",
+                flexDirection: "column",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+                },
               }}
             >
               <CardMedia
                 component="img"
-                image={reg.image}
+                src={reg.imageRegion || "/placeholder.webp"}
                 alt={reg.name}
                 sx={{
-                  width: "100%",
-                  height: 180,
-                  objectFit: "contain",
-                  borderRadius: "8px",
+                  height: 300,
+                  objectFit: "cover",
+                  borderTopLeftRadius: "12px",
+                  borderTopRightRadius: "12px",
                 }}
               />
-              <CardContent sx={{ p: 1 }}>
+              <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
                 <Typography
-                  variant="subtitle1"
+                  variant="h5"
                   sx={{ color: "#E0E0E0", fontWeight: "600" }}
                 >
                   {reg.name}

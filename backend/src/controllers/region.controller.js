@@ -27,7 +27,8 @@ export const getRegionById = async (req, res) => {
 
 export const createRegion = async (req, res) => {
   try {
-    const { name, description, imageRegion } = req.body;
+    const { name, description } = req.body;
+    const imageRegion = req.body.imageRegion || process.env.DEFAULT_IMAGE_URL;
 
     if (!name) {
       return res.status(400).json({ error: "El nombre es obligatorio" });

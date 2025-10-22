@@ -79,7 +79,13 @@ export const login = async (req, res) => {
       sameSite: "strict",
     });
 
-    res.json({ accessToken });
+    res.json({
+      accessToken,
+      user: {
+        id: user._id,
+        role: user.role,
+      },
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

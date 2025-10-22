@@ -2,10 +2,6 @@ import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
-/*"primary": "#1212a1",
-              "background-light": "#9c9caa",
-              "background-dark": "#222241", */
-
 function AccessDenied() {
   const navigate = useNavigate();
 

@@ -9,7 +9,7 @@ import cors from "cors";
 
 const app = express();
 
-app.use(helmet()); // Agrega cabeceras seguras para prevenir ataques.
+app.use(helmet());
 
 app.use(
   cors({
@@ -20,7 +20,7 @@ app.use(
         callback(new Error("No autorizado por CORS"));
       }
     },
-    credentials: true, // Permite envío de cookies o headers de autenticación
+    credentials: true,
   })
 );
 

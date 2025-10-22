@@ -32,8 +32,9 @@ export const getCharacterById = async (req, res) => {
 
 export const createCharacter = async (req, res) => {
   try {
-    const { name, description, regionId, abilityIds, imageCharacter } =
-      req.body;
+    const { name, description, regionId, abilityIds } = req.body;
+    const imageCharacter =
+      req.body.imageCharacter || process.env.DEFAULT_IMAGE_URL;
 
     if (!name) {
       return res.status(400).json({ error: "El nombre es obligatorio" });

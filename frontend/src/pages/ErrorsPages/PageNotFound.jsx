@@ -1,5 +1,5 @@
 import { Box, Typography, Button } from "@mui/material";
-import image from "../../assets/404.png";
+import image from "../../assets/404.webp";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 

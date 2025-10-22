@@ -25,7 +25,6 @@ export const getAbilityById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 export const createAbility = async (req, res) => {
   try {
     const { name, description, effects, howToObtain, icon } = req.body;

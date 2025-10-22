@@ -126,9 +126,10 @@ function Characters() {
                 navigate(`/characters/${char._id}`);
               }}
               sx={{
-                backgroundColor: "#2A2A35",
-                borderRadius: "12px",
-                boxShadow: "0px 2px 6px rgba(0,0,0,0.3)",
+                backgroundColor: "#111121",
+                borderRadius: "10px",
+                cursor: "pointer",
+
                 textAlign: "center",
                 p: 2,
                 transition: "transform 0.2s",

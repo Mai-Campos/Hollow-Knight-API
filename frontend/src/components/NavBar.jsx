@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import icon from "../assets/icon.ico";
 import { NavLink, useLocation } from "react-router-dom";
 import { logout } from "../api/authService";
+import AvatarIMG from "../assets/avatar.webp";
 
 const pages = ["Home", "Characters", "Abilities", "Regions"];
 const settings = ["Logout"];
@@ -192,7 +193,7 @@ function NavBar() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
                     alt="Usuario"
-                    src="/static/images/avatar/2.jp"
+                    src={AvatarIMG}
                     sx={{
                       width: 40,
                       height: 40,

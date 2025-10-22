@@ -7,9 +7,9 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import characterImage from "../assets/characters.png";
-import abilitieImage from "../assets/abilities.png";
-import regionImage from "../assets/regions.png";
+import characterImage from "../assets/characters.webp";
+import abilitieImage from "../assets/abilities.webp";
+import regionImage from "../assets/regions.webp";
 import { useNavigate } from "react-router-dom";
 
 function Home() {

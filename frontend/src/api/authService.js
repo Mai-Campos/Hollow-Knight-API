@@ -30,6 +30,8 @@ export const login = async (form) => {
   }
 
   localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("user", JSON.stringify(data.user));
+
   return data;
 };
 
