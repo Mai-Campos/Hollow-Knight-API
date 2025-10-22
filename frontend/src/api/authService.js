@@ -1,5 +1,7 @@
+import { fetchWithAuth } from "../utils/fecthWithAuth";
+
 export const register = async (form) => {
-  const res = await fetch("http://localhost:3000/api/auth/register", {
+  const res = await fetchWithAuth("http://localhost:3000/api/auth/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -16,7 +18,7 @@ export const register = async (form) => {
 };
 
 export const login = async (form) => {
-  const res = await fetch("http://localhost:3000/api/auth/login", {
+  const res = await fetchWithAuth("http://localhost:3000/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -36,7 +38,7 @@ export const login = async (form) => {
 };
 
 export const refreshToken = async () => {
-  const res = await fetch("http://localhost:3000/api/auth/refresh", {
+  const res = await fetchWithAuth("http://localhost:3000/api/auth/refresh", {
     method: "POST",
     credentials: "include",
   });
@@ -51,7 +53,7 @@ export const refreshToken = async () => {
 };
 
 export const logout = async () => {
-  await fetch("http://localhost:3000/api/auth/logout", {
+  await fetchWithAuth("http://localhost:3000/api/auth/logout", {
     method: "POST",
     credentials: "include",
   });

@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function Regions() {
   const [search, setSearch] = useState("");
@@ -38,7 +39,7 @@ function Regions() {
       if (!token) return;
       try {
         setIsLoading(true);
-        const res = await fetch("http://localhost:3000/api/regions", {
+        const res = await fetchWithAuth("http://localhost:3000/api/regions", {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
         });
@@ -136,7 +137,7 @@ function Regions() {
             >
               <CardMedia
                 component="img"
-                src={reg.imageRegion || "/placeholder.webp"}
+                src={reg.imageRegion}
                 alt={reg.name}
                 sx={{
                   height: 300,

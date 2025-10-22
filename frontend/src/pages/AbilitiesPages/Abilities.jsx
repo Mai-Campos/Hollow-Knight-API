@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { iconsMap } from "../../utils/iconsMap";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function Abilities() {
   const [search, setSearch] = useState("");
@@ -37,7 +38,7 @@ function Abilities() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:3000/api/abilities", {
+        const res = await fetchWithAuth("http://localhost:3000/api/abilities", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

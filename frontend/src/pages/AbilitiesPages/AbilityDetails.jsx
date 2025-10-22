@@ -4,11 +4,13 @@ import {
   Typography,
   Card,
   CardContent,
+  Chip,
   Divider,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { iconsMap } from "../../utils/iconsMap";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function AbilityDetails() {
   const [ability, setAbility] = useState(null);
@@ -35,10 +37,13 @@ function AbilityDetails() {
 
     const getAbility = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/abilities/${id}`, {
-          credentials: "include",
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetchWithAuth(
+          `http://localhost:3000/api/abilities/${id}`,
+          {
+            credentials: "include",
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         if (!res.ok) throw new Error("Error fetching ability data");
         const data = await res.json();
         setAbility(data);
@@ -207,17 +212,18 @@ function AbilityDetails() {
           Effects
         </Typography>
 
-        <Typography
-          sx={{
-            color: "#9e9e9e",
-            fontSize: 16,
-            lineHeight: 1.8,
-            textAlign: "justify",
-            mb: 4,
-          }}
-        >
-          {ability.effects || "No effects described for this ability."}
-        </Typography>
+        {ability.effects.map((ef) => (
+          <Chip
+            key={ef}
+            label={ef}
+            sx={{
+              color: "white",
+              backgroundColor: "#5E5BFF",
+              mr: 0.5,
+              mb: 0.5,
+            }}
+          />
+        ))}
 
         <Divider sx={{ borderColor: "#2E2E58", my: 2, opacity: 0.4 }} />
 

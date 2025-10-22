@@ -29,6 +29,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { iconsMap } from "../../utils/iconsMap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function ManageAbilities() {
   const [token, setToken] = useState(localStorage.getItem("accessToken"));
@@ -70,7 +71,7 @@ function ManageAbilities() {
 
   const fetchAbilities = async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/abilities", {
+      const res = await fetchWithAuth("http://localhost:3000/api/abilities", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -146,7 +147,7 @@ function ManageAbilities() {
 
       const method = editingId ? "PUT" : "POST";
 
-      const res = await fetch(url, {
+      const res = await fetchWithAuth(url, {
         method,
         headers: {
           "Content-Type": "application/json",
@@ -203,13 +204,16 @@ function ManageAbilities() {
 
     try {
       setDeletingId(id);
-      const res = await fetch(`http://localhost:3000/api/abilities/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
+      const res = await fetchWithAuth(
+        `http://localhost:3000/api/abilities/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
 
       if (res.status !== 204 && !res.ok)
         throw new Error("Failed to delete ability");
@@ -422,8 +426,10 @@ function ManageAbilities() {
           onChange={handleChange}
           variant="outlined"
           margin="normal"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <TextField
@@ -436,8 +442,10 @@ function ManageAbilities() {
           onChange={handleChange}
           variant="outlined"
           margin="normal"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <FormControl fullWidth margin="normal">
@@ -480,8 +488,10 @@ function ManageAbilities() {
           onChange={handleChange}
           variant="outlined"
           margin="normal"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <FormControl fullWidth margin="normal">

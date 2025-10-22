@@ -1,4 +1,5 @@
-// src/utils/cloudinary.js
+import { fetchWithAuth } from "./fecthWithAuth";
+
 export const uploadImageToCloudinary = async (file, type) => {
   if (!file) throw new Error("No se proporcionó ningún archivo");
   if (file.type !== "image/webp")
@@ -18,7 +19,7 @@ export const uploadImageToCloudinary = async (file, type) => {
 
   const cloudName = "dpylotukc";
 
-  const res = await fetch(
+  const res = await fetchWithAuth(
     `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
     {
       method: "POST",

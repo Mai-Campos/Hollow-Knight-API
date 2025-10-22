@@ -8,6 +8,7 @@ import {
   Divider,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function RegionDetail() {
   const [region, setRegion] = useState(null);
@@ -30,10 +31,13 @@ function RegionDetail() {
     if (!token) return;
     const getRegion = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/regions/${id}`, {
-          credentials: "include",
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetchWithAuth(
+          `http://localhost:3000/api/regions/${id}`,
+          {
+            credentials: "include",
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         if (!res.ok) throw new Error("Error fetching region data");
         const data = await res.json();
         setRegion(data);

@@ -48,8 +48,12 @@ export const createCharacter = async (req, res) => {
       abilities: abilityIds,
     });
 
-    newCharacter.save();
-    res.status(201).json(newCharacter);
+    await newCharacter.save();
+    const populatedCharacter = await newCharacter.populate([
+      "region",
+      "abilities",
+    ]);
+    res.status(201).json(populatedCharacter);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

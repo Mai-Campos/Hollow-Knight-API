@@ -13,6 +13,7 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { iconsMap } from "../../utils/iconsMap";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function CharacterDetail() {
   const [character, setCharacter] = useState(null);
@@ -40,10 +41,13 @@ function CharacterDetail() {
 
     const getCharacter = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/characters/${id}`, {
-          credentials: "include",
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetchWithAuth(
+          `http://localhost:3000/api/characters/${id}`,
+          {
+            credentials: "include",
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         if (!res.ok) throw new Error("Error fetching character data");
         const data = await res.json();
         setCharacter(data);
@@ -129,7 +133,7 @@ function CharacterDetail() {
           >
             <CardMedia
               component="img"
-              image={character.image || "/placeholder.png"}
+              src={character.imageCharacter}
               alt={character.name}
               sx={{
                 width: "100%",
@@ -191,14 +195,23 @@ function CharacterDetail() {
                   return (
                     <Chip
                       key={ability._id}
+                      onClick={() => {
+                        navigate(`/abilities/${ability._id}`);
+                      }}
                       label={ability.name}
                       icon={IconComponent ? <IconComponent /> : null}
                       sx={{
                         backgroundColor: "#353540",
                         color: "#E0E0E0",
+                        transition: "all 0.3s ease",
+                        cursor: "pointer",
                         fontWeight: 600,
                         "& .MuiChip-icon": {
                           color: "#3207cd",
+                        },
+                        "&:hover": {
+                          transform: "translateY(-5px)",
+                          boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
                         },
                       }}
                     />
@@ -230,17 +243,26 @@ function CharacterDetail() {
               </Typography>
 
               <Card
+                onClick={() => {
+                  navigate(`/regions/${character.region._id}`);
+                }}
                 sx={{
                   position: "relative",
                   borderRadius: "12px",
                   overflow: "hidden",
                   height: { xs: 200, sm: 250, md: 300 },
                   backgroundColor: "#111121",
+                  transition: "all 0.3s ease",
+                  cursor: "pointer",
+                  "&:hover": {
+                    transform: "translateY(-5px)",
+                    boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+                  },
                 }}
               >
                 <CardMedia
                   component="img"
-                  image={character.region.image || "/region-placeholder.jpg"}
+                  src={character.region.imageRegion}
                   alt={character.region.name}
                   sx={{
                     width: "100%",

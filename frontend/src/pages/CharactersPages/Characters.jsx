@@ -10,6 +10,7 @@ import {
   LinearProgress,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 function Characters() {
   const [search, setSearch] = useState("");
@@ -38,13 +39,16 @@ function Characters() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:3000/api/characters", {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          credentials: "include",
-        });
+        const res = await fetchWithAuth(
+          "http://localhost:3000/api/characters",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            credentials: "include",
+          }
+        );
 
         const data = await res.json();
 
@@ -118,7 +122,7 @@ function Characters() {
       </Box>
 
       {isLoading && <LinearProgress color="inherit" />}
-      <Grid container spacing={4} columns={{ xs: 1, sm: 2, md: 4, lg: 4 }}>
+      <Grid container spacing={4}>
         {filtered.map((char) => (
           <Grid key={char._id}>
             <Card
@@ -126,30 +130,33 @@ function Characters() {
                 navigate(`/characters/${char._id}`);
               }}
               sx={{
-                backgroundColor: "#111121",
-                borderRadius: "10px",
+                backgroundColor: "#1C1C2A",
+                borderRadius: "12px",
                 cursor: "pointer",
-
-                textAlign: "center",
-                p: 2,
-                transition: "transform 0.2s",
-                "&:hover": { transform: "translateY(-4px)" },
+                transition: "all 0.3s ease",
+                minHeight: 280,
+                display: "flex",
+                flexDirection: "column",
+                "&:hover": {
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+                },
               }}
             >
               <CardMedia
                 component="img"
-                image={char.image}
+                src={char.imageCharacter}
                 alt={char.name}
                 sx={{
-                  width: "100%",
-                  height: 180,
-                  objectFit: "contain",
-                  borderRadius: "8px",
+                  height: 300,
+                  objectFit: "cover",
+                  borderTopLeftRadius: "12px",
+                  borderTopRightRadius: "12px",
                 }}
               />
-              <CardContent sx={{ p: 1 }}>
+              <CardContent sx={{ textAlign: "center", flexGrow: 1 }}>
                 <Typography
-                  variant="subtitle1"
+                  variant="h5"
                   sx={{ color: "#E0E0E0", fontWeight: "600" }}
                 >
                   {char.name}

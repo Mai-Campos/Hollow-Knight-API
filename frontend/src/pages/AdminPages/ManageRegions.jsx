@@ -24,6 +24,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadImageToCloudinary } from "../../utils/cloudinary";
+import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 const defaultImage =
   "https://res.cloudinary.com/dpylotukc/image/upload/v1761076750/deafult_havb7m.webp"; // tu imagen por defecto
@@ -60,7 +61,7 @@ function ManageRegions() {
       if (!token) return;
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:3000/api/regions", {
+        const res = await fetchWithAuth("http://localhost:3000/api/regions", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -112,7 +113,7 @@ function ManageRegions() {
         imageUrl = await uploadImageToCloudinary(imageFile, "region");
 
       if (editingId) {
-        const res = await fetch(
+        const res = await fetchWithAuth(
           `http://localhost:3000/api/regions/${editingId}`,
           {
             method: "PUT",
@@ -132,7 +133,7 @@ function ManageRegions() {
         );
         showSnackbar("Región actualizada correctamente", "success");
       } else {
-        const res = await fetch("http://localhost:3000/api/regions", {
+        const res = await fetchWithAuth("http://localhost:3000/api/regions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -176,10 +177,13 @@ function ManageRegions() {
 
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3000/api/regions/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetchWithAuth(
+        `http://localhost:3000/api/regions/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (!res.ok && res.status !== 204)
         throw new Error("No se pudo eliminar la región");
@@ -328,8 +332,10 @@ function ManageRegions() {
           onChange={handleChange}
           fullWidth
           variant="outlined"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <TextField
@@ -341,8 +347,10 @@ function ManageRegions() {
           multiline
           rows={3}
           variant="outlined"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
