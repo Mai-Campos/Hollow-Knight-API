@@ -390,8 +390,10 @@ function ManageCharacters() {
           onChange={handleChange}
           fullWidth
           variant="outlined"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <TextField
@@ -403,8 +405,10 @@ function ManageCharacters() {
           multiline
           rows={3}
           variant="outlined"
-          InputLabelProps={{ style: { color: "#C3C3C3" } }}
-          InputProps={{ style: { color: "#C3C3C3" } }}
+          slotProps={{
+            input: { style: { color: "#C3C3C3" } },
+            inputLabel: { style: { color: "#C3C3C3" } },
+          }}
         />
 
         <FormControl fullWidth>
@@ -464,7 +468,7 @@ function ManageCharacters() {
               "&:hover": { borderColor: "#5B21B6" },
             }}
           >
-            Seleccionar archivo (.webp)
+            Select file (.webp)
             <input
               type="file"
               accept="image/webp"
@@ -474,7 +478,7 @@ function ManageCharacters() {
           </Button>
           {imageFile && (
             <Typography sx={{ color: "#C9B6D1" }}>
-              {imageFile.name} seleccionado
+              {imageFile.name} selected
             </Typography>
           )}
         </Box>
@@ -495,9 +499,9 @@ function ManageCharacters() {
           {isSubmitting ? (
             <CircularProgress size={26} sx={{ color: "white" }} />
           ) : editingId ? (
-            "Actualizar Personaje"
+            "Upadte Character"
           ) : (
-            "Guardar Personaje"
+            "Save Character"
           )}
         </Button>
 
@@ -512,7 +516,7 @@ function ManageCharacters() {
               borderColor: "#6D28D9",
             }}
           >
-            Cancelar edición
+            Cancel edit
           </Button>
         )}
       </Box>
@@ -531,7 +535,7 @@ function ManageCharacters() {
 
       {/* Diálogo de eliminación */}
       <Dialog open={deleteDialog.open} onClose={closeDeleteDialog}>
-        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogTitle>Eliminar personaje </DialogTitle>
         <DialogContent>
           ¿Seguro que deseas eliminar este personaje? Esta acción no se puede
           deshacer.

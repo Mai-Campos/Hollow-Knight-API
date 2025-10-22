@@ -1,3 +1,4 @@
+// Material icons dependencies
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import ShieldIcon from "@mui/icons-material/Shield";

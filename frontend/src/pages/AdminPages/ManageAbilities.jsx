@@ -79,7 +79,7 @@ function ManageAbilities() {
         credentials: "include",
       });
 
-      if (!res.ok) throw new Error("Error fetching abilities");
+      if (!res.ok) throw new Error("Error obteniendo habilidades");
       const data = await res.json();
       setAbilities(data);
     } catch (error) {
@@ -134,7 +134,10 @@ function ManageAbilities() {
 
     const { name, description, effects, howToObtain, icon } = newAbility;
     if (!name || !description || !effects.length || !howToObtain || !icon) {
-      showSnackbar("Please fill in all fields before saving.", "warning");
+      showSnackbar(
+        "Por favor rellene todos los campos antes de guardar",
+        "warning"
+      );
       return;
     }
 
@@ -159,7 +162,7 @@ function ManageAbilities() {
 
       if (!res.ok)
         throw new Error(
-          editingId ? "Error updating ability" : "Error creating ability"
+          editingId ? "Error actualizando habilidad" : "Error creado habilidad"
         );
 
       const updatedOrCreated = await res.json();
@@ -168,10 +171,10 @@ function ManageAbilities() {
         setAbilities((prev) =>
           prev.map((a) => (a._id === editingId ? updatedOrCreated : a))
         );
-        showSnackbar("Ability updated successfully!", "success");
+        showSnackbar("Habilidad actualizada correctamente!", "success");
       } else {
         setAbilities((prev) => [...prev, updatedOrCreated]);
-        showSnackbar("Ability created successfully!", "success");
+        showSnackbar("Habilidad creada correctamente!", "success");
       }
 
       resetForm();
@@ -192,7 +195,7 @@ function ManageAbilities() {
       icon: ability.icon,
     });
     setSelectedIcon(ability.icon);
-    showSnackbar(`Editing "${ability.name}"`, "info");
+    showSnackbar(`Editando "${ability.name}"`, "info");
   };
 
   const confirmDelete = (id) => setDeleteDialog({ open: true, id });
@@ -216,10 +219,10 @@ function ManageAbilities() {
       );
 
       if (res.status !== 204 && !res.ok)
-        throw new Error("Failed to delete ability");
+        throw new Error("Error eliminando habilidad");
 
       setAbilities((prev) => prev.filter((a) => a._id !== id));
-      showSnackbar("Ability deleted successfully", "success");
+      showSnackbar("Habilidad eliminada correctamente", "success");
     } catch (error) {
       showSnackbar(error.message, "error");
     } finally {
@@ -563,14 +566,14 @@ function ManageAbilities() {
         onClose={closeDeleteDialog}
         color="black"
       >
-        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogTitle>Eliminar habilidad</DialogTitle>
         <DialogContent>
-          Are you sure you want to delete this ability? This action cannot be
-          undone.
+          Estas seguro que deseas eliminar esta habilidad, esta acción no se
+          podrá deshacer
         </DialogContent>
         <DialogActions>
           <Button onClick={closeDeleteDialog} sx={{ color: "#6D28D9" }}>
-            Cancel
+            Cancelar
           </Button>
           <Button
             onClick={handleDelete}
@@ -578,7 +581,7 @@ function ManageAbilities() {
             variant="contained"
             autoFocus
           >
-            Delete
+            Eliminar
           </Button>
         </DialogActions>
       </Dialog>

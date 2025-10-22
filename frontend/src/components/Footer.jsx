@@ -87,7 +87,7 @@ function Footer() {
                 sx={{
                   color: "inherit",
                   transition: "all 0.3s ease",
-                  "&:hover": { color: "#c3c3c3", transform: "scale(1.2)" }, // GitHub gray
+                  "&:hover": { color: "#c3c3c3", transform: "scale(1.2)" },
                 }}
               >
                 <GitHub sx={{ fontSize: 30 }} />
@@ -101,7 +101,7 @@ function Footer() {
                 sx={{
                   color: "inherit",
                   transition: "all 0.3s ease",
-                  "&:hover": { color: "#0088cc", transform: "scale(1.2)" }, // Telegram blue
+                  "&:hover": { color: "#0088cc", transform: "scale(1.2)" },
                 }}
               >
                 <Telegram sx={{ fontSize: 30 }} />

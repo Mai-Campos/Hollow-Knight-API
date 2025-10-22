@@ -128,8 +128,8 @@ function RegionDetail() {
           alt={region.name}
           sx={{
             width: "100%",
-            aspectRatio: "16/9", // Mantiene la proporción
-            objectFit: "cover", // O "contain" si quieres mostrar toda la imagen
+            aspectRatio: "16/9",
+            objectFit: "cover",
             borderRadius: 2,
             transition: "transform 0.5s",
             "&:hover": { transform: "scale(1.03)" },

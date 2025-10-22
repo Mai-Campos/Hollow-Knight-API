@@ -115,7 +115,7 @@ function Login() {
                 letterSpacing: "1px",
               }}
             >
-              Iniciar Sesión
+              Login
             </Typography>
 
             <form
@@ -127,7 +127,7 @@ function Login() {
                 fullWidth
                 margin="normal"
                 name="email"
-                label="Correo electrónico"
+                label="Email"
                 type="email"
                 value={form.email}
                 onChange={handleChange}
@@ -146,7 +146,7 @@ function Login() {
                 fullWidth
                 margin="normal"
                 name="password"
-                label="Contraseña"
+                label="Password"
                 type={"password"}
                 value={form.password}
                 onChange={handleChange}
@@ -176,14 +176,14 @@ function Login() {
                   },
                 }}
               >
-                ENTRAR
+                Login
               </Button>
               <Typography
                 variant="body2"
                 align="center"
                 sx={{ mt: 3, color: "#C3C3C3" }}
               >
-                ¿No tienes una cuenta?
+                You dont have an account?
                 <Box
                   component="span"
                   sx={{
@@ -197,7 +197,7 @@ function Login() {
                     navigate("/register");
                   }}
                 >
-                  Regístrate
+                  Register
                 </Box>
               </Typography>
             </form>

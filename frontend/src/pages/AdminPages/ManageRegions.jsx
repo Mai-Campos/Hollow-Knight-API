@@ -27,7 +27,7 @@ import { uploadImageToCloudinary } from "../../utils/cloudinary";
 import { fetchWithAuth } from "../../utils/fecthWithAuth";
 
 const defaultImage =
-  "https://res.cloudinary.com/dpylotukc/image/upload/v1761076750/deafult_havb7m.webp"; // tu imagen por defecto
+  "https://res.cloudinary.com/dpylotukc/image/upload/v1761076750/deafult_havb7m.webp";
 
 function ManageRegions() {
   const [token, setToken] = useState(localStorage.getItem("accessToken"));
@@ -363,7 +363,7 @@ function ManageRegions() {
               "&:hover": { borderColor: "#5B21B6" },
             }}
           >
-            Seleccionar archivo (.webp)
+            Select file (.webp)
             <input
               type="file"
               accept="image/webp"
@@ -373,7 +373,7 @@ function ManageRegions() {
           </Button>
           {imageFile && (
             <Typography sx={{ color: "#C9B6D1" }}>
-              {imageFile.name} seleccionado
+              {imageFile.name} selected
             </Typography>
           )}
         </Box>
@@ -394,9 +394,9 @@ function ManageRegions() {
           {isSubmitting ? (
             <CircularProgress size={26} sx={{ color: "white" }} />
           ) : editingId ? (
-            "Actualizar Región"
+            "Update Región"
           ) : (
-            "Guardar Región"
+            "Save Región"
           )}
         </Button>
 
@@ -411,7 +411,7 @@ function ManageRegions() {
               borderColor: "#6D28D9",
             }}
           >
-            Cancelar edición
+            Cancel edit
           </Button>
         )}
       </Box>

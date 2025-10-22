@@ -37,21 +37,6 @@ export const login = async (form) => {
   return data;
 };
 
-export const refreshToken = async () => {
-  const res = await fetchWithAuth("http://localhost:3000/api/auth/refresh", {
-    method: "POST",
-    credentials: "include",
-  });
-
-  const data = await res.json();
-
-  if (!res.ok) throw new Error(data.error || "Error al refrescar el token");
-
-  localStorage.setItem("accessToken", data.accessToken);
-
-  return data.accessToken;
-};
-
 export const logout = async () => {
   await fetchWithAuth("http://localhost:3000/api/auth/logout", {
     method: "POST",

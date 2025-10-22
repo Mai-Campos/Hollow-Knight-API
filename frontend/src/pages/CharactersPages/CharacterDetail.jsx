@@ -145,9 +145,9 @@ function CharacterDetail() {
           </Card>
         </Grid>
 
-        {/* 🧾 DERECHA: Descripción, habilidades y región */}
+        {/*Descripción, habilidades y región */}
         <Grid item xs={12} md={6}>
-          {/* 📜 Descripción */}
+          {/*  Descripción */}
           <Box sx={{ mb: 4 }}>
             <Typography
               variant="h6"
@@ -169,7 +169,7 @@ function CharacterDetail() {
             />
           </Box>
 
-          {/* 🧠 Habilidades */}
+          {/*Habilidades */}
           <Box sx={{ mb: 4 }}>
             <Typography
               variant="h6"
@@ -228,7 +228,7 @@ function CharacterDetail() {
             />
           </Box>
 
-          {/* 🌍 Región */}
+          {/*  Región */}
           {character.region && (
             <Box>
               <Typography

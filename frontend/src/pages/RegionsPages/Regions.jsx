@@ -91,13 +91,15 @@ function Regions() {
           size="small"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          InputProps={{
-            style: { color: "white" },
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: "#9A8C98" }} />
-              </InputAdornment>
-            ),
+          slotProps={{
+            input: {
+              style: { color: "white" },
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: "#9A8C98" }} />
+                </InputAdornment>
+              ),
+            },
           }}
           sx={{
             backgroundColor: "rgba(255,255,255,0.05)",
