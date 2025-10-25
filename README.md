@@ -27,14 +27,14 @@ Permite la visualización de personajes, habilidades y regiones del juego y sus 
 
 ## 🧠 Funcionalidades principales
 
-✅ Registro, login y logout de usuarios.
-✅ Autenticación con JWT y refresh token.
-✅ Roles: usuario y administrador.
-✅ Visualización de datos.
-✅ Panel de administración protegido con CRUD de entidades (personajes, habilidades y regiones).
-✅ Subida y gestión de imágenes con Cloudinary.
-✅ Variables de entorno para configuración segura.
-✅ Test implementados a la API.
+- ✅ Registro, login y logout de usuarios.
+- ✅ Autenticación con JWT y refresh token.
+- ✅ Roles: usuario y administrador.
+- ✅ Visualización de datos.
+- ✅ Panel de administración protegido con CRUD de entidades (personajes, habilidades y regiones).
+- ✅ Subida y gestión de imágenes con Cloudinary.
+- ✅ Variables de entorno para configuración segura.
+- ✅ Test implementados a la API.
 
 ---
 
@@ -146,6 +146,31 @@ Abre en el navegador:
 ---
 
 ## 🖼️ Vistas
+<table>
+  <tr>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280357/Login_ki2wmq.png" width="500px"/></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280358/home2_fjemji.png" width ="500px"/></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280356/404_aj7926.png" width ="500px"/></td>
+
+  </tr>
+  <tr>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280355/admin-panel_khyd1k.png" width="500px"/></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280360/character-detail_w9qazj.png" width="500px" /></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280354/ability-detail_cecnbf.png" width="500px" /></td>
+  </tr>
+   <tr>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280354/abilities_ovjbv6.png" width="500px"/></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280358/regions_gj6xlt.png" width="500px" /></td>
+    <td><img src = "https://res.cloudinary.com/dpylotukc/image/upload/v1761280358/characters_lylbkx.png" width="500px" /></td>
+
+  </tr>
+</table>
+
+
+
+
+
+
 
 
 
