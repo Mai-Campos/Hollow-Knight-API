@@ -108,7 +108,7 @@ export const refresh = async (req, res) => {
 
     if (!valid) return res.status(403).json({ error: "No autorizado" });
 
-    const accessToken = createaccessToken(user);
+    const accessToken = createAccessToken(user);
 
     res.json({ accessToken });
   } catch (error) {
